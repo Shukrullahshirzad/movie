@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import heroImg from "./assets/hero.png";
 import Search from "./components/Search";
+import MovieCard from "./components/MovieCard";
+import Spinner from "./components/Spinner";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -24,18 +26,19 @@ export default function App() {
 
     try {
       const endpint = `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
-      const response = await fetch(endpint, API_OPTIONS);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      if (data.response === "False") {
-        setErrorMessage(data.error || "No movies found.");
-        setMoviesList([]);
-        return;
-      }
+        const response = await fetch(endpint, API_OPTIONS);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        if (data.response === "False") {
+            setErrorMessage(data.error || "No movies found.");
+            setMoviesList([]);
+            return;
+        }
+        console.log(data)
       setMoviesList(data.results || []);
       setErrorMessage(null);
     } catch (error) {
@@ -71,7 +74,7 @@ export default function App() {
           ) : (
             <ul>
               {moviesList.map((movie) => (
-                  <p key={ movie.id} className="text-white">{movie.title}</p>
+                  <MovieCard key={movie.id} movie={ movie} />
               ))}
             </ul>
           )}
