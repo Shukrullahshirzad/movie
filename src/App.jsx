@@ -21,11 +21,12 @@ export default function App() {
   const [moviesList, setMoviesList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchMovies = async () => {
+  const fetchMovies = async (query = '') => {
     setIsLoading(true);
 
     try {
-      const endpint = `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+    const endpint = query ? `${API_BASE_URL}/search/movie?query=${query}`
+            :`${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
         const response = await fetch(endpint, API_OPTIONS);
         
         if (!response.ok) {
@@ -50,8 +51,8 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    fetchMovies(seartchTerm);
+  }, [seartchTerm]);
   return (
     <main>
       <div className="pattern" />
