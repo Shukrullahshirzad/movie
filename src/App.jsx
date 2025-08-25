@@ -3,6 +3,7 @@ import heroImg from "./assets/hero.png";
 import Search from "./components/Search";
 import MovieCard from "./components/MovieCard";
 import Spinner from "./components/Spinner";
+import { useDebounce } from "react-use";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -20,26 +21,29 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [moviesList, setMoviesList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [debouncedSearchTerm, setDebouncedSearchedTerm] = useState("");
 
-  const fetchMovies = async (query = '') => {
+  useDebounce(() => setDebouncedSearchedTerm(seartchTerm), 1000, [seartchTerm]);
+  const fetchMovies = async (query = "") => {
     setIsLoading(true);
 
     try {
-    const endpint = query ? `${API_BASE_URL}/search/movie?query=${query}`
-            :`${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
-        const response = await fetch(endpint, API_OPTIONS);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        if (data.response === "False") {
-            setErrorMessage(data.error || "No movies found.");
-            setMoviesList([]);
-            return;
-        }
-        console.log(data)
+      const endpint = query
+        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
+        : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+      const response = await fetch(endpint, API_OPTIONS);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.response === "False") {
+        setErrorMessage(data.error || "No movies found.");
+        setMoviesList([]);
+        return;
+      }
+      console.log(data);
       setMoviesList(data.results || []);
       setErrorMessage(null);
     } catch (error) {
@@ -51,8 +55,8 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetchMovies(seartchTerm);
-  }, [seartchTerm]);
+    fetchMovies(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
   return (
     <main>
       <div className="pattern" />
@@ -69,13 +73,13 @@ export default function App() {
         <section className="all-movies">
           <h2 className="mt-[40px]">All Movies</h2>
           {isLoading ? (
-            <Spinner/>
+            <Spinner />
           ) : errorMessage ? (
             <p className="text-red-500">{errorMessage}</p>
           ) : (
             <ul>
               {moviesList.map((movie) => (
-                  <MovieCard key={movie.id} movie={ movie} />
+                <MovieCard key={movie.id} movie={movie} />
               ))}
             </ul>
           )}
