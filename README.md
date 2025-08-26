@@ -1,12 +1,41 @@
-# React + Vite
+# Movie Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application to search for movies, view trending titles, and discover new favorites. Built with React and Vite, it leverages The Movie Database (TMDb) API for movie data and Appwrite for backend services.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** (with Hooks)
+- **Vite** (for fast development and build)
+- **Appwrite** (for backend/database)
+- **The Movie Database (TMDb) API**
+- **JavaScript (ES6+)**
+- **TailwindCss**
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Search for movies by title
+- View trending movies
+- Responsive and modern UI
+- Debounced search for better performance
+- Error handling and loading states
+
+## Screenshot
+
+![App Screenshot](./src/assets/screenshot.png)
+
+## Live Demo
+
+[View Live Demo](https:)
+
+## What I Have Learned
+
+- How to integrate third-party APIs (TMDb) into a React application
+- Using Appwrite for backend services and tracking search counts
+- Implementing debounced search with `react-use`
+- Managing state and side effects with React Hooks (`useState`, `useEffect`)
+- Building responsive layouts and reusable components
+- Error handling and user feedback in UI
+
+---
+
+Feel free to clone, contribute, or suggest improvements!

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import heroImg from "./assets/hero.png";
+import heroBg from "./assets/hero-bg.png";
+
 import Search from "./components/Search";
 import MovieCard from "./components/MovieCard";
 import Spinner from "./components/Spinner";
@@ -87,9 +89,9 @@ export default function App() {
       <main>
         <div className="pattern" />
         <div className="wrapper">
-          
+
           {/* hero section */}
-          <header>
+          <header >
             <img src={heroImg} alt="Hero Banner" />
             <h1>
               Find <span className="text-gradient">Movies</span> You'll Like
