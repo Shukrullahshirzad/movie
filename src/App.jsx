@@ -53,9 +53,13 @@ export default function App() {
       if (query && data.results.length > 0) {
         await updateSearchCount(query, data.results[0]);
       }
+    
+    
     } catch (error) {
       console.error("Error fetching movies:", error);
       setErrorMessage("Failed to fetch movies. Please try again later.");
+    
+    
     } finally {
       setIsLoading(false);
     }
@@ -83,6 +87,8 @@ export default function App() {
       <main>
         <div className="pattern" />
         <div className="wrapper">
+          
+          {/* hero section */}
           <header>
             <img src={heroImg} alt="Hero Banner" />
             <h1>
@@ -91,6 +97,9 @@ export default function App() {
             </h1>
             <Search seartchTerm={seartchTerm} setSearchTerm={setSearchTerm} />
           </header>
+
+
+          {/* trending secion */}
           {trendingMovies.length > 0 && (
             <section className="trending">
               <h2>Trending Movies</h2>
@@ -104,6 +113,9 @@ export default function App() {
               </ul>
             </section>
           )}
+
+
+          {/* all movies section */}
           <section className="all-movies">
             <h2 className="">All Movies</h2>
             {isLoading ? (
