@@ -25,7 +25,7 @@ A modern web application to search for movies, view trending titles, and discove
 
 ## Live Demo
 
-[View Live Demo](https:)
+[View Live Demo](https://shukrullahshirzad.github.io/moviehub/)
 
 ## What I Have Learned
 
