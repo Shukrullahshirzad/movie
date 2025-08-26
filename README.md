@@ -1,4 +1,4 @@
-# Movie Search App
+# MovieHub
 
 A modern web application to search for movies, view trending titles, and discover new favorites. Built with React and Vite, it leverages The Movie Database (TMDb) API for movie data and Appwrite for backend services.
 
